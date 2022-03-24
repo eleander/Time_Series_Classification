@@ -12,7 +12,7 @@ end_time = 100
 cutoff = 30
 power = 100
 
-## S1 Import
+## S2 Import
 from s1 import s1_generator as generator
 
 # For each run, append to lists
@@ -33,7 +33,7 @@ panda_df = pd.DataFrame(data = numpyArray,
                         for i in range(numpyArray.shape[0])],
                         columns = x)
 
-
+# Which duty cycle was it?
 duty_cycle = np.full(runs, 1)
 
 panda_df["y"] = duty_cycle
