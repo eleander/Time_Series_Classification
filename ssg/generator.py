@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+# Number of runs
 runs = 3
 
 # Constants
@@ -11,16 +12,14 @@ end_time = 100
 cutoff = 30
 power = 100
 
-## S1
-
-from s1 import s1_generator
-from constants import runs, end_time
+## S1 Import
+from s1 import s1_generator as generator
 
 # For each run, append to lists
 # In this case, only s1 was used so that it could be tested
 lists = []
 for val in range(runs): 
-    lists.append(s1_generator())
+    lists.append(generator())
 
 # Return a numpy array starting at 0-end_time with 1 as the increment
 x = np.arange(0, end_time, 1)
