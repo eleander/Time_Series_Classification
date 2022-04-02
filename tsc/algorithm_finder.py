@@ -61,26 +61,29 @@ clfs.append(ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5))
 clfs.append(IndividualBOSS())
 clfs.append(BOSSEnsemble(max_ensemble_size=5))
 clfs.append(KNeighborsTimeSeriesClassifier())
-clfs.append(ElasticEnsemble(
-    proportion_of_param_options=0.1,
-    proportion_train_for_test=0.1,
-))
-clfs.append(ProximityForest(n_estimators=5))
-clfs.append(HIVECOTEV2(
-    stc_params={
-        "estimator": RotationForest(n_estimators=3),
-        "n_shapelet_samples": 500,
-        "max_shapelets": 20,
-        "batch_size": 100,
-    },
-    drcif_params={"n_estimators": 10},
-    arsenal_params={"num_kernels": 100, "n_estimators": 5},
-    tde_params={
-        "n_parameter_samples": 25,
-        "max_ensemble_size": 5,
-        "randomly_selected_params": 10,
-    },
-))
+# Refer to s1_s2_no_vol_10_runs.txt
+# Time to train these algorithms are too long 30,000 ms for only 10 runs for s1 and s2
+
+# clfs.append(ElasticEnsemble(
+#     proportion_of_param_options=0.1,
+#     proportion_train_for_test=0.1,
+# ))
+# clfs.append(ProximityForest(n_estimators=5))
+# clfs.append(HIVECOTEV2(
+#     stc_params={
+#         "estimator": RotationForest(n_estimators=3),
+#         "n_shapelet_samples": 500,
+#         "max_shapelets": 20,
+#         "batch_size": 100,
+#     },
+#     drcif_params={"n_estimators": 10},
+#     arsenal_params={"num_kernels": 100, "n_estimators": 5},
+#     tde_params={
+#         "n_parameter_samples": 25,
+#         "max_ensemble_size": 5,
+#         "randomly_selected_params": 10,
+#     },
+# ))
 clfs.append(TimeSeriesForestClassifier(n_estimators=10))
 clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10))
 clfs.append(ShapeletTransformClassifier(

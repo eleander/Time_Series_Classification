@@ -1,0 +1,52 @@
+Training 1 out of 10
+Currently on: ContractableBOSS
+The accuracy was 1.0
+The time elapsed was: 1084.6858024597168 ms
+Training 2 out of 10
+Currently on: IndividualBOSS
+The accuracy was 0.6
+The time elapsed was: 44.966936111450195 ms
+Training 3 out of 10
+Currently on: BOSSEnsemble
+The accuracy was 1.0
+The time elapsed was: 2334.0840339660645 ms
+Training 4 out of 10
+Currently on: KNeighborsTimeSeriesClassifier
+The accuracy was 0.4
+The time elapsed was: 31.996488571166992 ms
+Training 5 out of 10
+Currently on: ElasticEnsemble
+The accuracy was 0.8
+The time elapsed was: 30298.10357093811 ms
+Training 6 out of 10
+Currently on: ProximityForest
+The accuracy was 1.0
+The time elapsed was: 59072.92604446411 ms
+Training 7 out of 10
+Currently on: HIVECOTEV2
+The accuracy was 1.0
+The time elapsed was: 30701.65967941284 ms
+Training 8 out of 10
+Currently on: TimeSeriesForestClassifier
+The accuracy was 1.0
+The time elapsed was: 66.03550910949707 ms
+Training 9 out of 10
+Currently on: RandomIntervalSpectralEnsemble
+The accuracy was 1.0
+The time elapsed was: 2831.258535385132 ms
+Training 10 out of 10
+Currently on: ShapeletTransformClassifier
+The accuracy was 0.8
+The time elapsed was: 347.0001220703125 ms
+
+Type                Name                                    Accuracy       Time in ms     
+dictionary_based    ContractableBOSS                        100%           1084.6858024597168
+dictionary_based    IndividualBOSS                          60%            44.966936111450195
+dictionary_based    BOSSEnsemble                            100%           2334.0840339660645
+distance_based      KNeighborsTimeSeriesClassifier          40%            31.996488571166992
+distance_based      ElasticEnsemble                         80%            30298.10357093811
+distance_based      ProximityForest                         100%           59072.92604446411
+hybrid              HIVECOTEV2                              100%           30701.65967941284
+interval_based      TimeSeriesForestClassifier              100%           66.03550910949707
+interval_based      RandomIntervalSpectralEnsemble          100%           2831.258535385132
+shapelet_based      ShapeletTransformClassifier             80%            347.0001220703125
