@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 # Number of runs
-runs = 3
+runs = 10000
 
 # Constants
 start_time = 30
@@ -13,7 +13,8 @@ cutoff = 30
 power = 100
 
 ## S2 Import
-from s1 import s1_generator as generator
+from s2 import s2_generator as generator
+
 
 # For each run, append to lists
 # In this case, only s1 was used so that it could be tested
@@ -40,4 +41,4 @@ panda_df["y"] = duty_cycle
 
 print(panda_df.shape)
 
-panda_df.to_csv("../datasets/"+"s1.csv")
+panda_df.to_csv("../datasets/"+"s2.csv")
