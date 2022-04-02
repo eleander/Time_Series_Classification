@@ -114,6 +114,7 @@ for count, clf in enumerate(clfs):
     end = time.time()
     time_elapsed_ms = (end - start)*1000
     times.append(time_elapsed_ms)
+    print(f"The accuracy was {acc_score}")
     print(f"The time elapsed was: {time_elapsed_ms} ms")
 
 
