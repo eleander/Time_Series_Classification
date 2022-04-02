@@ -8,7 +8,6 @@ import pandas as pd
 start_time = 30
 end_time = 100
 cutoff = 30
-power = 100
 
 ## S1
 
@@ -23,7 +22,7 @@ def s1_constants():
 # If x < a, return 0 because motor didn't start yet
 # If a < x < b, return power since motor is active
 # If x > b, return 0 because motor stopped operation
-def s1(x,a,b):
+def s1(x,a,b, power):
  if(x < a): return 0
  if(a<=x<=b): return power 
  else: return 0
@@ -31,7 +30,7 @@ def s1(x,a,b):
 lists = []
 
 # Generate a run of S1
-def s1_generator():
+def s1_generator(power):
     # Return a numpy array starting at 0-end_time with 1 as the increment
     x = np.arange(0, end_time, 1)
 
@@ -41,5 +40,5 @@ def s1_generator():
     # Use the s1 function to get the results for each time
     y = []
     for i in range(len(x)):
-       y.append(s1(x[i], a, b))
+       y.append(s1(x[i], a, b, power))
     return y
