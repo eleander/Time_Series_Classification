@@ -41,9 +41,6 @@ X_train, X_test, y_train, y_test = train_test_split(combined_df, y)
 # Define classifiers that will be used in algorithm finder
 from sktime.classification.dictionary_based import IndividualBOSS
 from sktime.classification.dictionary_based import ContractableBOSS
-
-
-# Come back
 from sktime.classification.dictionary_based import BOSSEnsemble
 from sktime.classification.distance_based import KNeighborsTimeSeriesClassifier
 from sktime.classification.distance_based import ElasticEnsemble
