@@ -104,14 +104,14 @@ import time
 
 times = []
 for count, clf in enumerate(clfs): 
-    start = time.time()
     print(f"Training {count+1} out of {len(clfs)}")
     print(f"Currently on: {get_clf_name(clf)}")
+    start = time.time()
     clf.fit(X_train, y_train)
+    end = time.time()
     y_pred = clf.predict(X_test)
     acc_score = accuracy_score(y_test, y_pred)
     acc_scores.append(acc_score)
-    end = time.time()
     time_elapsed_ms = (end - start)*1000
     times.append(time_elapsed_ms)
     print(f"The accuracy was {acc_score}")
