@@ -24,7 +24,7 @@ file_names = ["s1_no_vol", "s2_no_vol"]
 dfs= []
 y = []
 for file_name in file_names:
-    df = pd.read_csv ("../datasets/"+file_name+".csv", nrows=100)
+    df = pd.read_csv ("../datasets/"+file_name+".csv", nrows=10)
     df.drop(columns=df.columns[:1],axis=1, inplace=True)
     nested_df = from_2d_array_to_nested(df)
     y.extend([file_name[1]] * df.shape[0])
@@ -100,20 +100,29 @@ for clf in clfs:
 # Classify the dataset
 acc_scores = []
 
+import time
+
+times = []
 for count, clf in enumerate(clfs): 
+    start = time.time()
     print(f"Training {count+1} out of {len(clfs)}")
     print(f"Currently on: {get_clf_name(clf)}")
     clf.fit(X_train, y_train)
     y_pred = clf.predict(X_test)
     acc_score = accuracy_score(y_test, y_pred)
     acc_scores.append(acc_score)
+    end = time.time()
+    time_elapsed_ms = (end - start)*1000
+    times.append(time_elapsed_ms)
+    print(f"The time elapsed was: {time_elapsed_ms} ms")
+
 
 # Sort according to type
-types, acc_scores, clfs = zip(*sorted(zip(types, acc_scores, clfs)))
+types, acc_scores, clfs = zip(*sorted(zip(types, acc_scores, clfs), key=lambda pair: pair[0]))
 
 # Print Results 
 print()
-print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}")
-for type, clf, acc_score in zip(types, clfs, acc_scores):
+print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'Time in ms' : <15}")
+for type, clf, acc_score, time_ms in zip(types, clfs, acc_scores, times):
     acc_score_perc = '{:0.0f}'.format(acc_score*100)
-    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}")
+    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{time_ms : <15}")
