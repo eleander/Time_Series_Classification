@@ -2,6 +2,8 @@
 import pandas as pd 
 import numpy as np 
 from sklearn.metrics import accuracy_score
+from sklearn.metrics import f1_score
+
 
 from sktime.datatypes._panel._convert import (
     from_2d_array_to_nested,
@@ -17,15 +19,16 @@ def get_clf_class(estimator):
     return clf.__class__.__module__.split(".")[2]
 
 # Define file names to use for classification
-file_names = ["s1_no_vol", "s2_no_vol"]
+file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 
 # Get df from file and store in combined_df and y
 # Specify number of rows to use in classifcation
 dfs= []
 y = []
 for file_name in file_names:
-    df = pd.read_csv ("../datasets/"+file_name+".csv", nrows=10)
-    df.drop(columns=df.columns[:1],axis=1, inplace=True)
+    df = pd.read_csv ("../datasets/w_vol/"+file_name+".csv", nrows=1000)
+    # Only drop first column if it is a string like Run_1, Run_2
+    # df.drop(columns=df.columns[:1],axis=1, inplace=True)
     nested_df = from_2d_array_to_nested(df)
     y.extend([file_name[1]] * df.shape[0])
     dfs.append(nested_df)
@@ -99,6 +102,7 @@ for clf in clfs:
 
 # Classify the dataset
 acc_scores = []
+f1_scores = []
 
 import time
 
@@ -111,6 +115,8 @@ for count, clf in enumerate(clfs):
     end = time.time()
     y_pred = clf.predict(X_test)
     acc_score = accuracy_score(y_test, y_pred)
+    f1_score_val = f1_score(y_test, y_pred, average="weighted")
+    f1_scores.append(f1_score_val)
     acc_scores.append(acc_score)
     time_elapsed_ms = (end - start)*1000
     times.append(time_elapsed_ms)
@@ -119,11 +125,13 @@ for count, clf in enumerate(clfs):
 
 
 # Sort according to type
-types, acc_scores, clfs = zip(*sorted(zip(types, acc_scores, clfs), key=lambda pair: pair[0]))
+types, acc_scores, f1_scores, clfs = zip(*sorted(zip(types, acc_scores, f1_scores, clfs), key=lambda pair: pair[0]))
 
 # Print Results 
 print()
-print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'Time in ms' : <15}")
-for type, clf, acc_score, time_ms in zip(types, clfs, acc_scores, times):
+print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'F1 Score' : <15}{'Time in ms' : <15}")
+for type, clf, acc_score, f1_score_val,time_ms in zip(types, clfs, acc_scores, f1_scores, times):
     acc_score_perc = '{:0.0f}'.format(acc_score*100)
-    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{time_ms : <15}")
+    f1_score_perc = '{:0.0f}'.format(f1_score_val*100)
+    
+    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{(f1_score_perc)+'%':<15}{time_ms : <15}")
