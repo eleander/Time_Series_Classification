@@ -16,7 +16,7 @@ power = 100
 is_random = True
 
 ## S2 Import
-from s4 import s4_generator as generator
+from s1 import s1_generator as generator
 
 # For each run, append to lists
 # In this case, only s1 was used so that it could be tested
@@ -24,11 +24,11 @@ lists = []
 for val in range(runs):
     # No randomness = consistent value
     if (is_random == False):
-        lists.append(generator())
+        lists.append(generator(power))
     # Allow randomness = vary from 50 to 100
     else:
         rand_power = random.randint(50, power)
-        lists.append(generator())
+        lists.append(generator(power))
 
 # Return a numpy array starting at 0-end_time with 1 as the increment
 x = np.arange(0, end_time, 1)
@@ -49,4 +49,4 @@ panda_df["y"] = duty_cycle
 
 print(panda_df.shape)
 
-panda_df.to_csv("../datasets/"+"s4_w_vol.csv")
+panda_df.to_csv("../datasets/"+"s1_w_vol.csv")
