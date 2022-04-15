@@ -1,0 +1,37 @@
+Training 1 out of 7
+Currently on: ContractableBOSS
+The accuracy was 0.0
+The time elapsed was: 759.376049041748 ms
+Training 2 out of 7
+Currently on: IndividualBOSS
+The accuracy was 0.0
+The time elapsed was: 48.32863807678223 ms
+Training 3 out of 7
+Currently on: BOSSEnsemble
+The accuracy was 0.0
+The time elapsed was: 3612.396478652954 ms
+Training 4 out of 7
+Currently on: KNeighborsTimeSeriesClassifier
+The accuracy was 0.0
+The time elapsed was: 22.055864334106445 ms
+Training 5 out of 7
+Currently on: TimeSeriesForestClassifier
+The accuracy was 0.0
+The time elapsed was: 89.91670608520508 ms
+Training 6 out of 7
+Currently on: RandomIntervalSpectralEnsemble
+The accuracy was 0.0
+The time elapsed was: 410.7234477996826 ms
+Training 7 out of 7
+Currently on: ShapeletTransformClassifier
+The accuracy was 0.0
+The time elapsed was: 339.16211128234863 ms
+
+Type                Name                                    Accuracy       F1 Score       Time in ms     
+dictionary_based    ContractableBOSS                        0%             0%             759.376049041748
+dictionary_based    IndividualBOSS                          0%             0%             48.32863807678223
+dictionary_based    BOSSEnsemble                            0%             0%             3612.396478652954
+distance_based      KNeighborsTimeSeriesClassifier          0%             0%             22.055864334106445
+interval_based      TimeSeriesForestClassifier              0%             0%             89.91670608520508
+interval_based      RandomIntervalSpectralEnsemble          0%             0%             410.7234477996826
+shapelet_based      ShapeletTransformClassifier             0%             0%             339.16211128234863

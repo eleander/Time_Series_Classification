@@ -1,0 +1,26 @@
+Training 1 out of 7
+Currently on: ContractableBOSS
+The accuracy was 0.996
+The time elapsed was: 283241.2202358246 ms
+Training 2 out of 7
+Currently on: IndividualBOSS
+The accuracy was 0.953
+The time elapsed was: 4446.780204772949 ms
+Training 3 out of 7
+Currently on: BOSSEnsemble
+The accuracy was 0.998
+The time elapsed was: 7058881.399393082 ms
+Training 4 out of 7
+Currently on: KNeighborsTimeSeriesClassifier
+The accuracy was 0.746
+The time elapsed was: 1386.8482112884521 ms
+Training 5 out of 7
+Currently on: TimeSeriesForestClassifier
+The accuracy was 0.999
+The time elapsed was: 1610.7499599456787 ms
+Training 6 out of 7
+Currently on: RandomIntervalSpectralEnsemble
+The accuracy was 0.99
+The time elapsed was: 847030.8156013489 ms
+Training 7 out of 7
+Currently on: ShapeletTransformClassifier
