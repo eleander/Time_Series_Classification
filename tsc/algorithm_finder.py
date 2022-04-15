@@ -132,7 +132,8 @@ types, acc_scores, f1_scores, clfs = zip(*sorted(zip(types, acc_scores, f1_score
 print()
 print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'F1 Score' : <15}{'Time in ms' : <15}")
 for type, clf, acc_score, f1_score_val,time_ms in zip(types, clfs, acc_scores, f1_scores, times):
-    acc_score_perc = '{:0.0f}'.format(acc_score*100)
-    f1_score_perc = '{:0.0f}'.format(f1_score_val*100)
+    acc_score_perc = f"{acc_score*100:.2f}"
+    f1_score_perc = f"{f1_score_val*100:.2f}"
+    time_ms_redu = f"{time_ms:.2f}"
     
-    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{(f1_score_perc)+'%':<15}{time_ms : <15}")
+    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{(f1_score_perc)+'%':<15}{time_ms_redu : <15}")
