@@ -1,5 +1,3 @@
-# No change
-
 # Imports
 import pandas as pd 
 import numpy as np 
@@ -28,9 +26,9 @@ file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 dfs= []
 y = []
 for file_name in file_names:
-    df = pd.read_csv ("../datasets/w_vol/"+file_name+".csv", nrows=1000)
+    df = pd.read_csv ("../datasets/"+file_name+".csv", nrows=10)
     # Only drop first column if it is a string like Run_1, Run_2
-    # df.drop(columns=df.columns[:1],axis=1, inplace=True)
+    df.drop(columns=df.columns[:1],axis=1, inplace=True)
     nested_df = from_2d_array_to_nested(df)
     y.extend([file_name[1]] * df.shape[0])
     dfs.append(nested_df)
@@ -61,7 +59,7 @@ clfs = []
 
 clfs.append(ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5))
 clfs.append(IndividualBOSS())
-clfs.append(BOSSEnsemble(max_ensemble_size=5))
+# clfs.append(BOSSEnsemble(max_ensemble_size=5))
 clfs.append(KNeighborsTimeSeriesClassifier())
 # Refer to s1_s2_no_vol_10_runs.txt
 # Time to train these algorithms are too long 30,000 ms for only 10 runs for s1 and s2
@@ -87,7 +85,7 @@ clfs.append(KNeighborsTimeSeriesClassifier())
 #     },
 # ))
 clfs.append(TimeSeriesForestClassifier(n_estimators=10))
-clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10))
+# clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10))
 clfs.append(ShapeletTransformClassifier(
     estimator=RotationForest(n_estimators=3),
     n_shapelet_samples=500,
@@ -123,6 +121,7 @@ for count, clf in enumerate(clfs):
     time_elapsed_ms = (end - start)*1000
     times.append(time_elapsed_ms)
     print(f"The accuracy was {acc_score}")
+    print(f"The f1 score was {f1_score_val}")
     print(f"The time elapsed was: {time_elapsed_ms} ms")
 
 
