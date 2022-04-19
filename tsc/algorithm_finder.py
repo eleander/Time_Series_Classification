@@ -1,4 +1,5 @@
 # Imports
+from random import random
 import pandas as pd 
 import numpy as np 
 from sklearn.metrics import accuracy_score
@@ -7,8 +8,6 @@ from sklearn.metrics import f1_score
 
 from sktime.datatypes._panel._convert import (
     from_2d_array_to_nested,
-    from_nested_to_2d_array,
-    is_nested_dataframe,
 )
 
 # Helper function to get classifier name
@@ -36,10 +35,13 @@ for file_name in file_names:
 y = np.asarray(y)
 combined_df = pd.concat(dfs)
 
+print(f"The number of rows received are {len(combined_df.index)}")
+print(f"The number of y values received are {len(y)}")
+
 # Train / test split of data
 from sklearn.model_selection import train_test_split
 
-X_train, X_test, y_train, y_test = train_test_split(combined_df, y)
+X_train, X_test, y_train, y_test = train_test_split(combined_df, y, random_state=2022)
 
 # Define classifiers that will be used in algorithm finder
 from sktime.classification.dictionary_based import IndividualBOSS
@@ -57,9 +59,9 @@ from sktime.contrib.vector_classifiers._rotation_forest import RotationForest
 
 clfs = []
 
-clfs.append(ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5))
-clfs.append(IndividualBOSS())
-clfs.append(BOSSEnsemble(max_ensemble_size=5))
+clfs.append(ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5, random_state=2022))
+clfs.append(IndividualBOSS(random_state=2022))
+clfs.append(BOSSEnsemble(max_ensemble_size=5, random_state=2022))
 clfs.append(KNeighborsTimeSeriesClassifier())
 # Refer to s1_s2_no_vol_10_runs.txt
 # Time to train these algorithms are too long 30,000 ms for only 10 runs for s1 and s2
@@ -67,11 +69,12 @@ clfs.append(KNeighborsTimeSeriesClassifier())
 clfs.append(ElasticEnsemble(
     proportion_of_param_options=0.1,
     proportion_train_for_test=0.1,
+    random_state=2022
 ))
-clfs.append(ProximityForest(n_estimators=5))
+clfs.append(ProximityForest(n_estimators=5, random_state=2022))
 clfs.append(HIVECOTEV2(
     stc_params={
-        "estimator": RotationForest(n_estimators=3),
+        "estimator": RotationForest(n_estimators=3, random_state=2022),
         "n_shapelet_samples": 500,
         "max_shapelets": 20,
         "batch_size": 100,
@@ -83,14 +86,17 @@ clfs.append(HIVECOTEV2(
         "max_ensemble_size": 5,
         "randomly_selected_params": 10,
     },
+    random_state=2022,
+
 ))
-clfs.append(TimeSeriesForestClassifier(n_estimators=10))
-clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10))
+clfs.append(TimeSeriesForestClassifier(n_estimators=10,random_state=2022))
+clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10,random_state=2022))
 clfs.append(ShapeletTransformClassifier(
-    estimator=RotationForest(n_estimators=3),
+    estimator=RotationForest(n_estimators=3,random_state=2022),
     n_shapelet_samples=500,
     max_shapelets=20,
     batch_size=100,
+    random_state=2022
 ))
 
 
