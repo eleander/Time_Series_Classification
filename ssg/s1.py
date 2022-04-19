@@ -12,20 +12,25 @@ cutoff = 30
 ## S1
 
 # Function to create the a and b constant of S1
-# Rule: b - a < cutoff 
-def s1_constants(): 
+# Rule: b - a < cutoff
+def s1_constants():
     a = random.randint(0, start_time)
     b = random.randint(a, a + cutoff)
-    return a,b
+    return a, b
 
-# Given a and b 
+
+# Given a and b
 # If x < a, return 0 because motor didn't start yet
 # If a < x < b, return power since motor is active
 # If x > b, return 0 because motor stopped operation
-def s1(x,a,b, power):
- if(x < a): return 0
- if(a<=x<=b): return power 
- else: return 0
+def s1(x, a, b, power):
+    if x < a:
+        return 0
+    if a <= x <= b:
+        return power
+    else:
+        return 0
+
 
 lists = []
 
@@ -40,5 +45,5 @@ def s1_generator(power):
     # Use the s1 function to get the results for each time
     y = []
     for i in range(len(x)):
-       y.append(s1(x[i], a, b, power))
+        y.append(s1(x[i], a, b, power))
     return y
