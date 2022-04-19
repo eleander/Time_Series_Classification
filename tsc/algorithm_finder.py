@@ -37,13 +37,16 @@ for file_name in file_names:
 y = np.asarray(y)
 combined_df = pd.concat(dfs)
 
-print(f"The number of rows received are {len(combined_df.index)}")
+print(f"\nThe number of rows received are {len(combined_df.index)}")
 print(f"The number of y values received are {len(y)}")
 
 # Train / test split of data
 from sklearn.model_selection import train_test_split
 
 X_train, X_test, y_train, y_test = train_test_split(combined_df, y, random_state=2022)
+print(f"Length of X_train is {len(X_train)} and y_train is {len(y_train)}")
+print(f"Length of X_test is {len(X_test)} and y_test is {len(y_test)}\n")
+
 
 # Define classifiers that will be used in algorithm finder
 from sktime.classification.dictionary_based import IndividualBOSS
