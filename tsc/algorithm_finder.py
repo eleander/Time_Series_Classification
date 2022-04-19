@@ -1,7 +1,7 @@
 # Imports
 from random import random
-import pandas as pd 
-import numpy as np 
+import pandas as pd
+import numpy as np
 from sklearn.metrics import accuracy_score
 from sklearn.metrics import f1_score
 
@@ -12,22 +12,24 @@ from sktime.datatypes._panel._convert import (
 
 # Helper function to get classifier name
 def get_clf_name(estimator):
-    return(estimator.__class__.__name__)
+    return estimator.__class__.__name__
+
 
 def get_clf_class(estimator):
     return clf.__class__.__module__.split(".")[2]
+
 
 # Define file names to use for classification
 file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 
 # Get df from file and store in combined_df and y
 # Specify number of rows to use in classifcation
-dfs= []
+dfs = []
 y = []
 for file_name in file_names:
-    df = pd.read_csv ("../datasets/"+file_name+".csv", nrows=10)
+    df = pd.read_csv("../datasets/" + file_name + ".csv", nrows=10)
     # Only drop first column if it is a string like Run_1, Run_2
-    df.drop(columns=df.columns[:1],axis=1, inplace=True)
+    df.drop(columns=df.columns[:1], axis=1, inplace=True)
     nested_df = from_2d_array_to_nested(df)
     y.extend([file_name[1]] * df.shape[0])
     dfs.append(nested_df)
@@ -59,51 +61,58 @@ from sktime.contrib.vector_classifiers._rotation_forest import RotationForest
 
 clfs = []
 
-clfs.append(ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5, random_state=2022))
+clfs.append(
+    ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5, random_state=2022)
+)
 clfs.append(IndividualBOSS(random_state=2022))
 clfs.append(BOSSEnsemble(max_ensemble_size=5, random_state=2022))
 clfs.append(KNeighborsTimeSeriesClassifier())
 # Refer to s1_s2_no_vol_10_runs.txt
 # Time to train these algorithms are too long 30,000 ms for only 10 runs for s1 and s2
 
-clfs.append(ElasticEnsemble(
-    proportion_of_param_options=0.1,
-    proportion_train_for_test=0.1,
-    random_state=2022
-))
+clfs.append(
+    ElasticEnsemble(
+        proportion_of_param_options=0.1,
+        proportion_train_for_test=0.1,
+        random_state=2022,
+    )
+)
 clfs.append(ProximityForest(n_estimators=5, random_state=2022))
-clfs.append(HIVECOTEV2(
-    stc_params={
-        "estimator": RotationForest(n_estimators=3, random_state=2022),
-        "n_shapelet_samples": 500,
-        "max_shapelets": 20,
-        "batch_size": 100,
-    },
-    drcif_params={"n_estimators": 10},
-    arsenal_params={"num_kernels": 100, "n_estimators": 5},
-    tde_params={
-        "n_parameter_samples": 25,
-        "max_ensemble_size": 5,
-        "randomly_selected_params": 10,
-    },
-    random_state=2022,
-
-))
-clfs.append(TimeSeriesForestClassifier(n_estimators=10,random_state=2022))
-clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10,random_state=2022))
-clfs.append(ShapeletTransformClassifier(
-    estimator=RotationForest(n_estimators=3,random_state=2022),
-    n_shapelet_samples=500,
-    max_shapelets=20,
-    batch_size=100,
-    random_state=2022
-))
+clfs.append(
+    HIVECOTEV2(
+        stc_params={
+            "estimator": RotationForest(n_estimators=3, random_state=2022),
+            "n_shapelet_samples": 500,
+            "max_shapelets": 20,
+            "batch_size": 100,
+        },
+        drcif_params={"n_estimators": 10},
+        arsenal_params={"num_kernels": 100, "n_estimators": 5},
+        tde_params={
+            "n_parameter_samples": 25,
+            "max_ensemble_size": 5,
+            "randomly_selected_params": 10,
+        },
+        random_state=2022,
+    )
+)
+clfs.append(TimeSeriesForestClassifier(n_estimators=10, random_state=2022))
+clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10, random_state=2022))
+clfs.append(
+    ShapeletTransformClassifier(
+        estimator=RotationForest(n_estimators=3, random_state=2022),
+        n_shapelet_samples=500,
+        max_shapelets=20,
+        batch_size=100,
+        random_state=2022,
+    )
+)
 
 
 # Append type of algorithm (eg. dictionary_based)
 types = []
 
-for clf in clfs: 
+for clf in clfs:
     types.append(get_clf_class(type))
 
 # Classify the dataset
@@ -113,7 +122,7 @@ f1_scores = []
 import time
 
 times = []
-for count, clf in enumerate(clfs): 
+for count, clf in enumerate(clfs):
     print(f"Training {count+1} out of {len(clfs)}")
     print(f"Currently on: {get_clf_name(clf)}")
     start = time.time()
@@ -124,7 +133,7 @@ for count, clf in enumerate(clfs):
     f1_score_val = f1_score(y_test, y_pred, average="weighted")
     f1_scores.append(f1_score_val)
     acc_scores.append(acc_score)
-    time_elapsed_ms = (end - start)*1000
+    time_elapsed_ms = (end - start) * 1000
     times.append(time_elapsed_ms)
     print(f"The accuracy was {acc_score}")
     print(f"The f1 score was {f1_score_val}")
@@ -132,14 +141,22 @@ for count, clf in enumerate(clfs):
 
 
 # Sort according to type
-types, acc_scores, f1_scores, clfs = zip(*sorted(zip(types, acc_scores, f1_scores, clfs), key=lambda pair: pair[0]))
+types, acc_scores, f1_scores, clfs = zip(
+    *sorted(zip(types, acc_scores, f1_scores, clfs), key=lambda pair: pair[0])
+)
 
-# Print Results 
+# Print Results
 print()
-print(f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'F1 Score' : <15}{'Time in ms' : <15}")
-for type, clf, acc_score, f1_score_val,time_ms in zip(types, clfs, acc_scores, f1_scores, times):
+print(
+    f"{'Type' : <20}{'Name' : <40}{'Accuracy' : <15}{'F1 Score' : <15}{'Time in ms' : <15}"
+)
+for type, clf, acc_score, f1_score_val, time_ms in zip(
+    types, clfs, acc_scores, f1_scores, times
+):
     acc_score_perc = f"{acc_score*100:.2f}"
     f1_score_perc = f"{f1_score_val*100:.2f}"
     time_ms_redu = f"{time_ms:.2f}"
-    
-    print(f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{(f1_score_perc)+'%':<15}{time_ms_redu : <15}")
+
+    print(
+        f"{get_clf_class(clf): <20}{get_clf_name(clf) : <40}{(acc_score_perc)+'%':<15}{(f1_score_perc)+'%':<15}{time_ms_redu : <15}"
+    )
