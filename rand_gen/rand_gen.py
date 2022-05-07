@@ -14,14 +14,14 @@ dfs = []
 y = []
 for file_name in file_names:
     print(f"Reading file {file_name}")
-    df = pd.read_csv("../datasets/" + file_name + ".csv", nrows=5000)
+    df = pd.read_csv("../datasets/" + file_name + ".csv", nrows=1000)
     # Drop Run_1, Run_2, etc
     df.drop(columns=df.columns[:1], axis=1, inplace=True)
     dfs.append(df)
 
 noise_dfs = []
 
-percentage = 0.05
+percentage = 0.1
 
 count = 1
 
@@ -43,7 +43,7 @@ for df in dfs:
         num[num > 100] = 100
         num[num < 0] = 0
 
-        noise_dfs.append(noise_df)
+    noise_dfs.append(noise_df)
     print(f"Finished adding noise to {count} out of {len(dfs)} \n")
     count = count + 1
 
