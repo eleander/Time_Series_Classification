@@ -1,0 +1,37 @@
+The number of rows received are 4000
+The number of y values received are 4000
+Length of X_train is 3000 and y_train is 3000
+Length of X_test is 1000 and y_test is 1000
+
+Training 1 out of 5
+Currently on: ContractableBOSS
+The accuracy was 0.99
+The f1 score was 0.9900026662667267
+The time elapsed was: 362270.5764770508 ms
+Training 2 out of 5
+Currently on: IndividualBOSS
+The accuracy was 0.875
+The f1 score was 0.8738022609495797
+The time elapsed was: 5594.034194946289 ms
+Training 3 out of 5
+Currently on: KNeighborsTimeSeriesClassifier
+The accuracy was 0.935
+The f1 score was 0.9347217872429271
+The time elapsed was: 1290.998935699463 ms
+Training 4 out of 5
+Currently on: TimeSeriesForestClassifier
+The accuracy was 0.98
+The f1 score was 0.9801780605884083
+The time elapsed was: 2463.9978408813477 ms
+Training 5 out of 5
+Currently on: ShapeletTransformClassifier
+The accuracy was 0.989
+The f1 score was 0.9890412266607921
+The time elapsed was: 806504.5917034149 ms
+
+Type                Name                                    Accuracy       F1 Score       Time in ms
+dictionary_based    ContractableBOSS                        99.00%         99.00%         362270.58
+dictionary_based    IndividualBOSS                          87.50%         87.38%         5594.03
+distance_based      KNeighborsTimeSeriesClassifier          93.50%         93.47%         1291.00
+interval_based      TimeSeriesForestClassifier              98.00%         98.02%         2464.00
+shapelet_based      ShapeletTransformClassifier             98.90%         98.90%         806504.59
