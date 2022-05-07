@@ -48,5 +48,5 @@ for df in dfs:
 # Save each dataframe
 for file_name, noise_df in zip(file_names, noise_dfs):
     print(f"Saving {file_name} to w_vol_and_rand")
-    noise_df.to_csv("../datasets/w_vol_and_rand/" + file_name + ".csv")
+    noise_df.to_csv("../datasets/w_vol_and_rand/" + file_name + ".csv", index=False)
     print(f"Saved {file_name} to w_vol_and_rand")

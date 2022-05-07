@@ -49,4 +49,4 @@ panda_df["y"] = duty_cycle
 
 print(panda_df.shape)
 
-panda_df.to_csv("../datasets/" + "s1_w_vol.csv")
+panda_df.to_csv("../datasets/" + "s1_w_vol.csv", index=False)

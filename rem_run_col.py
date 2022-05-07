@@ -22,6 +22,7 @@ def get_clf_class(estimator):
 file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 
 for file_name in file_names:
-    df = pd.read_csv("./datasets/" + file_name + ".csv")
-    df.drop(columns=df.columns[:1], axis=1, inplace=True)
-    df.to_csv("./datasets/" + file_name + "_drop" + ".csv")
+    df = pd.read_csv("./datasets/w_vol_and_rand/" + file_name + ".csv")
+    # df.drop(columns=df.columns[:1], axis=1, inplace=True)
+    df.drop("Unnamed: 0", axis=1, inplace=True)
+    df.to_csv("./datasets/w_vol_and_rand/" + file_name + ".csv", index=False)
