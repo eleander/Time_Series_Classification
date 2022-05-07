@@ -39,7 +39,6 @@ numpyArray = np.array(lists)
 # Create a dataframe where each row is a run
 panda_df = pd.DataFrame(
     data=numpyArray,
-    index=["Run_" + str(i + 1) for i in range(numpyArray.shape[0])],
     columns=x,
 )
 
