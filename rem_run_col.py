@@ -23,7 +23,5 @@ file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 
 for file_name in file_names:
     df = pd.read_csv("./datasets/" + file_name + ".csv")
-    # df.drop(columns=df.columns[:1], axis=1, inplace=True)
-    # df.to_csv("./datasets/" + file_name + "_drop" + ".csv")
-    # df.drop("y", axis=1, inplace=True)
-    print(df["y"])
+    df.drop(columns=df.columns[:1], axis=1, inplace=True)
+    df.to_csv("./datasets/" + file_name + "_drop" + ".csv")
