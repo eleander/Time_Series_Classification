@@ -42,11 +42,4 @@ panda_df = pd.DataFrame(
     columns=x,
 )
 
-# Which duty cycle was it?
-duty_cycle = np.full(runs, 1)
-
-panda_df["y"] = duty_cycle
-
-print(panda_df.shape)
-
 panda_df.to_csv("../datasets/" + "s3_w_vol.csv", index=False)
