@@ -6,7 +6,7 @@ from numpy.random import default_rng
 rng = default_rng()
 
 # Define file names to use for classification
-file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
+file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol"]
 
 # Get df from file and store in combined_df and y
 # Specify number of rows to use in classifcation
@@ -14,7 +14,7 @@ dfs = []
 y = []
 for file_name in file_names:
     print(f"Reading file {file_name}")
-    df = pd.read_csv("../datasets/" + file_name + ".csv", nrows=1000)
+    df = pd.read_csv("../datasets/" + file_name + ".csv", nrows=5000)
     dfs.append(df)
 
 noise_dfs = []
@@ -47,6 +47,7 @@ for df in dfs:
 
 # Save each dataframe
 for file_name, noise_df in zip(file_names, noise_dfs):
-    print(f"Saving {file_name} to w_vol_and_rand")
-    noise_df.to_csv("../datasets/w_vol_and_rand/" + file_name + ".csv", index=False)
-    print(f"Saved {file_name} to w_vol_and_rand")
+    dirName = "w_vol_and_rand"
+    print(f"Saving {file_name} to {dirName}")
+    noise_df.to_csv(f"../datasets/{dirName}/" + file_name + ".csv", index=False)
+    print(f"Saved {file_name} to {dirName}")
