@@ -63,12 +63,12 @@ from sktime.contrib.vector_classifiers._rotation_forest import RotationForest
 
 clfs = []
 
-# clfs.append(
-#     ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5, random_state=seed)
-# )
-# clfs.append(IndividualBOSS(random_state=seed))
+clfs.append(
+    ContractableBOSS(n_parameter_samples=25, max_ensemble_size=5, random_state=seed)
+)
+clfs.append(IndividualBOSS(random_state=seed))
 # clfs.append(BOSSEnsemble(max_ensemble_size=5, random_state=seed))
-# clfs.append(KNeighborsTimeSeriesClassifier())
+clfs.append(KNeighborsTimeSeriesClassifier())
 # # Refer to s1_s2_no_vol_10_runs.txt
 # # Time to train these algorithms are too long 30,000 ms for only 10 runs for s1 and s2
 
@@ -100,15 +100,15 @@ clfs = []
 # )
 clfs.append(TimeSeriesForestClassifier(n_estimators=10, random_state=seed))
 # clfs.append(RandomIntervalSpectralEnsemble(n_estimators=10, random_state=seed))
-# clfs.append(
-#     ShapeletTransformClassifier(
-#         estimator=RotationForest(n_estimators=3, random_state=seed),
-#         n_shapelet_samples=500,
-#         max_shapelets=20,
-#         batch_size=100,
-#         random_state=seed,
-#     )
-# )
+clfs.append(
+    ShapeletTransformClassifier(
+        estimator=RotationForest(n_estimators=3, random_state=seed),
+        n_shapelet_samples=500,
+        max_shapelets=20,
+        batch_size=100,
+        random_state=seed,
+    )
+)
 
 
 # Append type of algorithm (eg. dictionary_based)
