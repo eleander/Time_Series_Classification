@@ -1,0 +1,6 @@
+Type,Name,Accuracy,F1_Score,Time_in_ms
+dictionary_based,ContractableBOSS,99.00,99.00,362270.58
+dictionary_based,IndividualBOSS,87.50,87.38,5594.03
+distance_based,KNeighborsTimeSeriesClassifier,93.50,93.47,1291.00
+interval_based,TimeSeriesForestClassifier,98.00,98.02,2464.00
+shapelet_based,ShapeletTransformClassifier,98.90,98.90,806504.59
