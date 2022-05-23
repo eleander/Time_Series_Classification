@@ -28,7 +28,7 @@ file_names = ["s1_w_vol", "s2_w_vol", "s3_w_vol", "s4_w_vol"]
 dfs = []
 y = []
 for file_name in file_names:
-    df = pd.read_csv("../datasets/w_vol_and_rand/" + file_name + ".csv", nrows=10)
+    df = pd.read_csv("../datasets/w_vol_and_rand/" + file_name + ".csv", nrows=1000)
     nested_df = from_2d_array_to_nested(df)
     y.extend([file_name[1]] * df.shape[0])
     dfs.append(nested_df)
