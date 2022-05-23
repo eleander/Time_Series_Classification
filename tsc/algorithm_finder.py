@@ -16,7 +16,7 @@ def get_clf_name(estimator):
     return estimator.__class__.__name__
 
 
-def get_clf_class(estimator):
+def get_clf_class(clf):
     return clf.__class__.__module__.split(".")[2]
 
 
