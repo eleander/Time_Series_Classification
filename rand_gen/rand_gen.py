@@ -23,7 +23,7 @@ percentage = 0.1
 
 count = 1
 
-# Add volatility to each dataframe
+# Add noise to each dataframe
 for df in dfs:
     print(f"Currently on df {count} out of {len(dfs)}")
     noise_df = df.copy()
@@ -32,8 +32,6 @@ for df in dfs:
         if run % 100 == 0:
             print(f"On run {run} out of {len(noise_df.index)}")
         noise = np.random.normal(0, noise_df.iloc[run, :].std(), cols) * percentage
-        # Noise has max value of 1, noise * max_noise results in max value
-        # of max_noise
         noise_df.iloc[run] = noise_df.iloc[run] + noise
 
         num = noise_df._get_numeric_data()
