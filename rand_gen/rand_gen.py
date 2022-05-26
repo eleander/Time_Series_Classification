@@ -34,6 +34,7 @@ for df in dfs:
         noise = np.random.normal(0, noise_df.iloc[run, :].std(), cols) * percentage
         noise_df.iloc[run] = noise_df.iloc[run] + noise
 
+        # Clean DF - can't have less than 0% or more than 100%
         num = noise_df._get_numeric_data()
 
         num[num > 100] = 100
