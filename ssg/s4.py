@@ -52,7 +52,6 @@ def s4(x, time_started, flipped_p, x0, y0, poly_time_ended, y_line, tc):
 
 
 lists = []
-
 # Generate a run of S4
 def s4_generator():
     # Return a numpy array starting at 0-end_time with 1 as the increment
